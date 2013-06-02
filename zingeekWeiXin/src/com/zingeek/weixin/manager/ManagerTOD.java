@@ -10,6 +10,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.zingeek.core.support.Utils;
 import com.zingeek.support.RandomUtils;
+import com.zingeek.weixin.action.ActionTOD;
 import com.zingeek.weixin.entity.RoomTOD;
 import com.zingeek.weixin.entity.UserTOD;
 
@@ -68,7 +69,7 @@ public class ManagerTOD extends ManagerBase<UserTOD, RoomTOD>{
 
 	public String truthOrDare(String key) {
 		String result = "";
-		if(Utils.ofList("真", "Z", "z").contains(key)) {
+		if(ActionTOD.真.contains(key)) {
 			if(真心话.isEmpty()) {
 				File file = new File(Utils.getRealPath() + "/WEB-INF/classes/META-INF/truthOrDare/truth.txt");
 				try {
@@ -87,7 +88,7 @@ public class ManagerTOD extends ManagerBase<UserTOD, RoomTOD>{
 			int rand = RandomUtils.nextInt(真心话.size());
 			result =  真心话.get(rand);
 			
-		} else if(Utils.ofList("大", "D", "d").contains(key)) {
+		} else if(ActionTOD.大.contains(key)) {
 			if(大冒险.isEmpty()) {
 				File file = new File(Utils.getRealPath() + "/WEB-INF/classes/META-INF/truthOrDare/dare.txt");
 				try {

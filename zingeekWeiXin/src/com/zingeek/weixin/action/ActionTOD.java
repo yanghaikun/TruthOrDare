@@ -37,13 +37,14 @@ public class ActionTOD implements Serializable{
 	@Inject Req req;
 	@Inject ManagerTOD managerTOD;
 	
+	private static final List<String> 帮 = Utils.ofList("帮", "幫", "帮助", "幫助", "B", "b");
 	private static final List<String> 退 = Utils.ofList("退", "T", "t");
 	private static final List<String> 进 = Utils.ofList("进", "進", "J", "j");
 	private static final List<String> 开 = Utils.ofList("开", "開", "K", "k");
 	private static final List<String> 玩 = Utils.ofList("玩", "W", "w");
 	private static final List<String> 查 = Utils.ofList("查", "C", "c");
-	private static final List<String> 真 = Utils.ofList("真", "真心话", "Z", "z");
-	private static final List<String> 大 = Utils.ofList("大", "大冒险", "D", "d");
+	public static final List<String> 真 = Utils.ofList("真", "真心话", "Z", "z");
+	public static final List<String> 大 = Utils.ofList("大", "大冒险", "D", "d");
 	
 	/**
 	 *测试接口
@@ -67,7 +68,7 @@ public class ActionTOD implements Serializable{
         	response = parseText(Content, user);
         	//return responseText(FromUserName, ToUserName, System.currentTimeMillis(), response);
         } else {
-        	response = "欢迎关注真心话大冒险助手。创建房间请输入【开】或者【k】；加入存在的房间请输入【进】或者【j】。在游戏中，创建房间的玩家为1号，负责控制游戏开始，其他玩家按提示参与即可。";
+        	response = "欢迎关注真心话大冒险助手。创建房间请输入【开】或者【k】；加入朋友的房间请输入【进】或者【j】。在游戏中，创建房间的玩家为1号，负责控制游戏开始，其他玩家按提示参与即可。";
         }
         
         return response;
@@ -123,7 +124,7 @@ public class ActionTOD implements Serializable{
         	response = parseText(Content, user);
         } else {
         	//事件，关注或者取消关注
-        	response = "欢迎关注真心话大冒险助手。输入以下命令进行游戏：【开】或者【k】：创建房间；【进】或者【j】：加入房间；【退】或者【t】：退出房间。在游戏中，创建房间的玩家为1号，负责控制游戏开始，其他玩家输入【进】或者【j】加入房间即可开始游戏。友情提示：真心话大冒险得和一帮死党玩才过瘾，问题和惩罚都很劲爆，如果你心理素质不行，还是不要和大家玩了，免得成了笑话。";
+        	response = "欢迎关注真心话大冒险助手。输入以下命令进行游戏：【开】或者【k】：创建房间；【进】或者【j】：加入房间；【退】或者【t】：退出房间；【帮】或者【b】：帮助信息。在游戏中，创建房间的玩家为1号，负责控制游戏开始，其他玩家输入【进】或者【j】加入房间即可开始游戏，所有真心话问题和大冒险惩罚都需要现场执行。友情提示：真心话大冒险得和一帮死党玩才过瘾，问题和惩罚都很劲爆，如果你心理素质不行，还是不要和大家玩了，免得成了笑话。";
         }
         
         return managerTOD.responseText(FromUserName, ToUserName, System.currentTimeMillis(), response);
@@ -159,6 +160,12 @@ public class ActionTOD implements Serializable{
 			return response;
 		}
 		
+		//寻求帮助
+		if(帮.contains(Content) || Content.contains("怎么") || Content.contains("如何") || Content.contains("怎样")) {
+			response = "帮助中心：当你创建好一个房间后，把房间号告诉你的朋友，让他们输入【进】或者【j】来加入你的房间，当大家都加入后，由房间的创建者输入【玩】或者【w】开始游戏。这只是一个游戏助手，所有的真心话问题和大冒险惩罚都需要大家现场执行，have fun.";
+			return response;
+		}
+		
 		if(user.room != null && !user.room.canPlay) {
 			response = "房间：" + user.roomId + "，有人中途退出，请重新创建房间来进行游戏。输入【退】或者【t】退出房间。";
 			return response;
@@ -175,7 +182,7 @@ public class ActionTOD implements Serializable{
 				user.status = StatusKeyTOD.进;
 				response = "请输入房间号：房间号是一个四位的数字，如 8888。";
 			} else {
-				response = "输入：【开】或者【k】：创建房间；【进】或者【j】：加入房间；【退】或者【t】：退出房间。";
+				response = "输入：【开】或者【k】：创建房间；【进】或者【j】：加入房间；【退】或者【t】：退出房间；【帮】或者【b】：帮助信息。";
 			}
 			break;
 			//玩家输入过开
@@ -294,7 +301,7 @@ public class ActionTOD implements Serializable{
 					} else {
 						if(user.room.random != user.num) {
 							if(StringUtils.isBlank(user.room.truthOrDare)) {
-									response = "倒霉蛋是：" + user.room.random + "号童鞋，丫还在纠结呢，真心话呢还是大冒险呢，敢不敢再慢一点，给TA点压力。继续输入【查】或者【c】来看结果。";
+									response = "倒霉蛋是：" + user.room.random + "号童鞋，丫还在纠结呢，真心话呢还是大冒险呢，给TA点压力，让TA快一点。继续输入【查】或者【c】来看结果。";
 								} else {
 									response = "倒霉蛋是：" + user.room.random + "号童鞋，丫选择了" + user.room.choice + "，问题是：" + user.room.truthOrDare + "。TA的表现让大家满意后，请1号童鞋输入【玩】或者【w】开始新一轮游戏";
 									user.knew = true;
