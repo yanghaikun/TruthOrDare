@@ -1,0 +1,36 @@
+﻿#login-main {
+	width:1000px;
+	height:580px;
+	background-image: url(/images/login_limit/login-limit-bg.jpg);
+	position: relative;
+}
+#login-queue-index {
+	position: absolute;
+	left: 627px;
+	top: 437px;
+	width: 40px;
+	height: 20px;
+	text-align: center;
+}
+
+/* 排队序号数字 */
+.login-limit-index-0, .login-limit-index-1, .login-limit-index-2, .login-limit-index-3, .login-limit-index-4, 
+.login-limit-index-5, .login-limit-index-6, .login-limit-index-7, .login-limit-index-8, .login-limit-index-9 {
+   background: url(/images/login_limit/login-limit-index.png) no-repeat top left;
+   width: 8px;
+   height: 12px;
+   display: inline-block;
+   margin-top: 4px;
+   margin-left: 2px;
+}
+.login-limit-index-0 { background-position: 0 0; } 
+.login-limit-index-1 { background-position: 0 -17px; } 
+.login-limit-index-2 { background-position: 0 -34px; } 
+.login-limit-index-3 { background-position: 0 -51px; } 
+.login-limit-index-4 { background-position: 0 -68px; } 
+.login-limit-index-5 { background-position: 0 -85px; } 
+.login-limit-index-6 { background-position: 0 -102px; } 
+.login-limit-index-7 { background-position: 0 -119px; } 
+.login-limit-index-8 { background-position: 0 -136px; } 
+.login-limit-index-9 { background-position: 0 -153px; }
+

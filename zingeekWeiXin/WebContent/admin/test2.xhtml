@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:s="http://jboss.org/seam/faces"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich"
+		xmlns:comp="http://java.sun.com/jsf/composite/components"
+		template="/admin/layout/template.xhtml">
+    <ui:param name="bean" value="#{user.test}" />
+	<ui:define name="body" >
+	<center>
+		<h:form>
+		用户名：<h:outputLabel value="#{bean.user.id}"/>
+		金币数量：<h:outputLabel value="#{bean.user.coin}"/>
+	<h:selectOneMenu value="#{bean.coinAdd}">
+				<f:selectItem itemValue="100" itemLabel="100$"/>
+				<f:selectItem itemValue="500" itemLabel="500$"/>
+				<f:selectItem itemValue="1000" itemLabel="1000$"/>
+				<f:selectItem itemValue="10000" itemLabel="10000$"/>
+				</h:selectOneMenu>
+	<h:commandButton value="增加金币" action="#{bean.coinAdd()}" />
+	</h:form>
+	<br />
+	<h:form>
+		LINE:
+			<h:selectOneMenu value="#{bean.line}" >
+					<c:forEach var="i" begin="1" end="#{bean.lineAll}">
+						<f:selectItem itemValue="#{i}" itemLabel="#{i}" />
+					</c:forEach>
+				</h:selectOneMenu>
+				&nbsp;BET:
+				<h:selectOneMenu value="#{bean.bet}">
+				<f:selectItems value="#{bean.betAll}" var="_b" itemValue="#{_b}" itemLabel="#{_b}"></f:selectItems>
+				</h:selectOneMenu>
+				&nbsp;次数:
+				<h:selectOneMenu value="#{bean.times}">
+				<f:selectItem itemValue="100" itemLabel="一百次"/>
+				<f:selectItem itemValue="1000" itemLabel="一千次"/>
+				<f:selectItem itemValue="10000" itemLabel="一万次"/>
+				<f:selectItem itemValue="100000" itemLabel="十万次"/>
+				<f:selectItem itemValue="1000000" itemLabel="百万次"/>
+				<f:selectItem itemValue="10000000" itemLabel="千万次"/>
+				<f:selectItem itemValue="100000000" itemLabel="一亿次"/>
+				</h:selectOneMenu>
+				&nbsp;
+				<h:commandButton value="SPIN" action="#{bean.spinN()}" />
+			</h:form>
+		<br />
+		收益结果：
+		<ul>
+		<li>单次投入：<h:outputLabel value="#{bean.line * bean.bet}" /></li>
+		<li>总投入：<h:outputLabel value="#{bean.invest}" /></li>
+			<li>总收益：<h:outputLabel value="#{bean.winTotal}" /></li>
+			<li>收益与投入比：<h:outputLabel value="#{bean.rate}" /></li>
+			</ul>
+			中奖次数：
+		<ul>
+		<li>总次数：<h:outputLabel value="#{bean.times}" /></li>
+			<li>中奖次数：<h:outputLabel value="#{bean.timesWin}" /></li>
+			<li>中奖次数 / 总次数：<h:outputLabel value="#{bean.rateTimes}" /></li>
+			</ul>
+			
+			更详细：
+			<br />
+			<ul>
+			<li>jackpot出现次数：<h:outputLabel value="#{bean.result.jackpot}" /></li>
+			<li>fiveOfKind出现次数：<h:outputLabel value="#{bean.result.fiveOfKind}" /></li>
+			<li>megaWin出现次数：<h:outputLabel value="#{bean.result.megaWin}" /></li>
+			<li>bigWin出现次数：<h:outputLabel value="#{bean.result.bigWin}" /></li>
+			<li>bonus小游戏出现次数：<h:outputLabel value="#{bean.result.bonus}" /></li>
+			<li>freeSpin出现次数：<h:outputLabel value="#{bean.result.freeSpin}" /></li>
+			<li>crystal出现总个数：<h:outputLabel value="#{bean.result.crystalAll}" /></li>
+			<li>knight出现总个数：<h:outputLabel value="#{bean.result.knightAll}" /></li>
+		</ul>
+			
+		
+		</center>
+	</ui:define>
+	
+</ui:composition>      

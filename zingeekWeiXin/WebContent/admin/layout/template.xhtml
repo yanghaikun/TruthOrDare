@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich">
+      
+<f:view contentType="text/html">
+    <h:head>
+    	<meta http-equiv="X-UA-Compatible" content="IE=8" />
+        <title>后台管理</title>
+    </h:head>
+    <h:body>
+    	<link href="/stylesheets/admin.css" rel="stylesheet" type="text/css" />
+        <rich:messages globalOnly="true"/>
+		<a4j:status id="loading">
+			<f:facet name="start">
+				<div style="position: fixed; top: 5px; left: 50%; margin-left: 345px; background-color: lightyellow; padding: 2px 10px 2px 5px;">
+					<img src="/images/loading-16.gif" style="vertical-align: text-bottom;"/>正在处理...
+				</div>
+			</f:facet>
+		</a4j:status>
+		<ui:insert name="body" />
+    </h:body>
+</f:view>
+</html>

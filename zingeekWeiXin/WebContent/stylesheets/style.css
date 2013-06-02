@@ -1,0 +1,116 @@
+﻿body { background-color: #000;   }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height:18px;
+}
+#login a{color:yellow;font-weight:bold;_position:absolute;_float:left}
+#login_form input{width:300px;font-weight:bold;font-size:20px;height:28px;bolder:1px #ccc solid}
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+#top { color: #fff; }
+#top a { color: #fff; }
+#top a:visited { color: #fff; }
+#top a:hover { color: #fff; background-color:#000; }
+
+td,td a:visited,td a,td a:link,label,div.content {color:#000}
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 400px;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+
+textarea {
+	width:500px;
+	height:60px;
+}
+h1 {
+	font-size:14px;
+	font-weight:bold;
+}
+input.button {
+	width:200px;
+}
+
+table {
+         border-collapse: collapse;
+         padding:1px;
+         width: 100%; 
+         margin: 20 20 10 20;  
+}
+table  th, table  td div.head{
+     background:#dcdcdc;
+     font-size:12px;
+     padding:5px;
+     text-align:left;
+} 
+table  tr.pm_head th{
+     text-align:center;
+     background:#efefef;
+     border:1px #dcdcdc solid;  
+}
+table td{
+     vertical-align:top;
+     padding:5px;
+     border-bottom:1px #ccc solid;
+}
+table  td.inherit{
+     text-align:center;
+     background:#ffc;
+     border-left:1px #ccc solid;  
+     border-right:1px #ccc solid;  
+     vertical-align: top;
+}
+
+#item_sn {
+	font-size:15px;
+	color:red;
+	font-family:verdana,arial;
+	font-weight:bold;
+}
+
+a.topbutton {
+    text-decoration: none;
+    width: 48px;
+    height: 23px;
+    display: block;
+    float: right;
+    margin-left:10px;
+}
+

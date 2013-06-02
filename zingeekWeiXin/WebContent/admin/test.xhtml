@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:s="http://jboss.org/seam/faces"
+		xmlns:h="http://java.sun.com/jsf/html"
+		xmlns:f="http://java.sun.com/jsf/core"
+		xmlns:c="http://java.sun.com/jsp/jstl/core"
+		xmlns:ui="http://java.sun.com/jsf/facelets"
+		xmlns:a4j="http://richfaces.org/a4j"
+		xmlns:rich="http://richfaces.org/rich"
+		xmlns:comp="http://java.sun.com/jsf/composite/components"
+		template="/admin/layout/template.xhtml">
+    <ui:param name="bean" value="#{user.test}" />
+	<ui:define name="body" >
+	<center>
+		<h:form>
+		用户名：<h:outputLabel value="#{bean.user.id}"/>
+		金币数量：<h:outputLabel value="#{bean.user.coin}"/>
+	<h:selectOneMenu value="#{bean.coinAdd}">
+				<f:selectItem itemValue="100" itemLabel="100$"/>
+				<f:selectItem itemValue="500" itemLabel="500$"/>
+				<f:selectItem itemValue="1000" itemLabel="1000$"/>
+				<f:selectItem itemValue="10000" itemLabel="10000$"/>
+				</h:selectOneMenu>
+	<h:commandButton value="增加金币" action="#{bean.coinAdd()}" />
+	</h:form>
+	<br />
+	<h:form>
+		LINE:
+			<h:selectOneMenu value="#{bean.line}" >
+			<c:
+					<c:forEach var="i" begin="1" end="#{bean.lineAll}">
+						<f:selectItem itemValue="#{i}" itemLabel="#{i}" />
+					</c:forEach>
+				</h:selectOneMenu>
+				&nbsp;BET:
+				<h:selectOneMenu value="#{bean.betAll}">
+				<c:forEach var="i" begin="1" end="#{bean.betAll.length}">
+						<f:selectItem itemValue="#{bean.betAll[i]}" itemLabel="#{bean.betAll[i]}" />
+					</c:forEach>
+				</h:selectOneMenu>
+				&nbsp;
+				<h:commandButton value="SPIN" action="#{bean.spin()}" />
+			</h:form>
+		<br />
+			<font color="red">随机结果：</font>
+		<rich:dataTable id="matrix" value="#{bean.matrix}" var="_m" >
+		<rich:
+				<rich:column>
+					<f:facet name="header">0</f:facet>
+					<h:outputLabel value="#{_m[0]}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">1</f:facet>
+					<h:outputLabel value="#{_m[1]}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">2</f:facet>
+					<h:outputLabel value="#{_m[2]}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">3</f:facet>
+					<h:outputLabel value="#{_m[3]}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">4</f:facet>
+					<h:outputLabel value="#{_m[4]}" />
+				</rich:column>
+			</rich:dataTable>
+			<br />
+			
+		<font color="blue" >获奖励详情：</font>
+		<ul>
+		<li>单次投入：<h:outputLabel value="#{bean.line * bean.bet}" /></li>
+			<li>单次收益：<h:outputLabel value="#{bean.result.winTotal}" /></li>
+			<li><h:outputLabel value="scatter超过三个，开启FREE SPIN：#{bean.result.scatter}" rendered="#{bean.result.scatter.size > 0}"/></li>
+			<li><h:outputLabel value="出现snack，位置：#{bean.result.snack}" rendered="#{bean.result.snack.size > 0}"/></li>
+			<li>详情：
+			<rich:dataTable id="winLine" value="#{bean.result.winLines}" var="_r" rowClasses="tableRowStyleA, tableRowStyleB"  >
+				<rich:column>
+					<f:facet name="header">line</f:facet>
+					<h:outputLabel value="#{_r.line}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">payLine</f:facet>
+					<h:outputLabel value="#{_r.payLine}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">winNum</f:facet>
+					<h:outputLabel value="#{_r.winNum}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">winCoin</f:facet>
+					<h:outputLabel value="#{_r.winCoin}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">lineString</f:facet>
+					<h:outputLabel value="#{_r.lineString}" />
+				</rich:column>
+				<rich:column>
+					<f:facet name="header">bonus</f:facet>
+					<h:outputLabel value="#{_r.bonus}" />
+				</rich:column>
+			</rich:dataTable>
+			</li>
+		</ul>
+		<br />
+		<h:form>
+		摇n次：n=
+		<h:selectOneMenu value="#{bean.times}">
+				<f:selectItem itemValue="100" itemLabel="100次"/>
+				<f:selectItem itemValue="500" itemLabel="500次"/>
+				<f:selectItem itemValue="1000" itemLabel="1000次"/>
+				<f:selectItem itemValue="10000" itemLabel="10000次"/>
+				</h:selectOneMenu>
+				<h:commandButton value="spinN" action="#{bean.spinN()}" />
+		<br />
+		</h:form>
+		结果：
+		<ul>
+		<li>总投入：<h:outputLabel value="#{bean.putTotal}" /></li>
+			<li>总收益：<h:outputLabel value="#{bean.winTotal}" /></li>
+			<li>收益与投入比：<h:outputLabel value="#{bean.rate}" /></li>
+		</ul>
+		
+		</center>
+	</ui:define>
+	
+</ui:composition>      
